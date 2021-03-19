@@ -1,2 +1,2 @@
 # .dotfiles
-Personal configuration files, likely a huge mess
+personal configuration files, likely very shitty
