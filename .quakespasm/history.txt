@@ -1,0 +1,11 @@
++mlook
+map
+maps
+map  TestWildebrookMonsters
+map  TestWildebrookMonsters.map
+map  TestWildebrook
+maps
+map TestWildebrook
+maps
+map testWildebrookMonsters
+map testWildebrook

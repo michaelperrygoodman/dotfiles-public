@@ -1,0 +1,387 @@
+================================================================================
+
+    COPPER
+    a single-player refinement mod
+    for id software's QUAKE
+    
+    File        : copper.zip
+    Date        : June 20th, 2019
+    Author      : Matthew "Lunaran" Breit
+    Email       : itslunaranyo@gmail.com
+    Website     : http://www.lunaran.com/
+    
+================================================================================
+    
+    ABOUT COPPER
+    ============
+We all like Quake, but if we're being honest, its gameplay isn't as tight as it could be. By the end of its development in 1996, id were burned out and just wanted to ship something and take a break (something I came to understand quite a bit as a game developer), and a hurried Doom clone sewn together from dark fantasy was what we got. Over the years since, several high-profile single-player mods have sought to expand Quake's breadth, perceiving problems in its design as gaps that need to be filled and new content as the solution. I wanted to instead polish Quake's existing gameplay the way id might have if they'd taken the time to do so, to improve its depth and clarity as much as possible before considering what could be built on its foundation. 
+
+Copper is therefore meant to be "Vanilla+", targeted at being a drop-in improvement to stock /id1/ gameplay and an equally suitable basis for new mods. It neither adds nor replaces any items, weapons, or monsters. It is not intended to be a kitchen-sink supermod like Quoth or Arcane Dimensions, nor move Quake towards some new 'vision' other than what it already is (or, at best, is trying to be).
+
+A summary, if you'd like to just get the broad strokes and go play:
+
+    - Weapons fire is not blocked by monsters in death animations
+    - Ring of Shadows makes enemies less accurate in combat
+    - Vore missiles have a less-than-perfect turn rate
+    - Ogres are 'partially' Z-aware
+    - Zombie edge cases are fixed
+    - Armor protection is proportional to current quantity
+    - Nightmare skill is 50 max HP instead of turret-monsters
+
+    
+    
+    INSTALLATION
+    ============
+Unzip the contents of the zip file into your /quake/ directory, so that the /copper/ folder is alongside, not in, the /id1/ folder.
+
+Start your favorite Quake engine port with '-game copper' appended to the command line. Fitzquake-derived engines such as Quakespasm or MarkV are recommended, but any flavor of GLQuake should do. Play with GL_NEAREST texture filtering, like the dark elders intended.
+
+Please note: running the game with a different -game prefix, or none, and changing the mod to Copper via the console in such engines that support this may lead to unwanted config state being carried over from other mods, leading to potentially unpredictable results. Bite the bullet and make a new shortcut. (Especially before reporting bugs.)
+
+Start a new game and play through any (or all!) of the original episodes, the additional new episode Underdark Overbright, or try out any custom Quake single player map that doesn't require another mod. Retry old favorites!
+
+
+
+    DEVELOPER COMMENTARY
+    ====================
+All of my changes to Quake's single-player and the rationale behind them are explained below. Each has been carefully weighed and tested, from the points of view of both a player and a mapper. (If you want to know what neat stuff has been added for mappers to use, scroll to the end.) In all cases I preferred a light touch, looking for ways to gain maximum benefit by applying minimal pressure to the design. They don't really change the game, and yet they really do.
+
+Over time, my reasons for changes coalesced around a very clearly motivated "spirit" to Copper, summed up in the form of a list of goals:
+
+    - Introduce no new major mechanics; only tweak existing mechanics and their interactions
+    - Ensure that any changed or adjusted mechanics are clearly legible through gameplay (no
+        invisible fudging of outcomes while hiding causes)
+    - Fix the "gameplay bugs" we've all just gotten used to since 1996, without sacrificing
+        what value or charm they may have
+    - Incorporate players' existing expectations and Quake instincts (don't set the player up
+        to feel like their old instincts "betrayed" them)
+    - Expand, never reduce, opportunity for skill-based play at high levels
+    - Give level designers more options and flexibility to build compelling gameplay and not 
+        just pretty rooms
+    - Maintain backwards compatibility with Quake's original four episodes and as many custom 
+        maps as feasible
+
+Detailed descriptions of every change, as well as the rationale behind each one, follow.
+
+
+    SHOOT-THROUGH
+    -------------
+The bug where monsters in death animations act as solid walls to bullets and projectiles has been fixed. Shotguns now feel much more effective at crowd control, especially against large amounts of weak monsters. As individual shotgun pellets add their damage to a target, once enough damage to kill it has been totaled up, further pellets will do 50% damage to that target and continue their trace beyond it at full damage. This works similarly to the Doom shotguns, giving Quake's shotguns the same satisfying feeling of room-clearing penetration, while retaining (albeit reducing) the chance of Quake's trademark shotgun-gibbing. Now, on average, it pays off for the player to maneuver to line up targets in rows when shotgunning, and to use the SSG on crowds.
+
+Nails no longer 'plink' against dying monsters, and grenades do not bounce off of them, passing through instead. Dying monsters are still solid to players and other monsters until the same times in the animations as before.
+
+
+    RING OF SHADOWS
+    ---------------
+The Ring of Shadows now protects the player in combat: monsters no longer know exactly where the player is once awakened. They will shoot or melee randomly into an invisible player's general area, hoping to get lucky, usually missing, and sometimes even hitting other monsters. In exchange, the Ring no longer makes all monsters deaf to your gunfire. This makes the Ring function much the same as the Invisibility powerup in Doom/Doom II, but with this addition: invisible players also take half damage from melee attacks. This felt like a fair addition in view of Quake's huge bounding boxes, and how relatively easy it is to be blocked or cornered by monsters.
+
+Dogs are known to be able to hunt using an otherworldly power of perception known as "smell" and are unaffected by the Ring of Shadows once awakened. Fiends are affected just like every other monster, because they have eyes. (To be less facetious about it, it's more fun to watch deadly Fiends dive hard into other monsters by mistake, or over cliff edges, than it is to imagine they can 'just sense' you.)
+
+Mappers almost never bother to place a Ring of Shadows in their levels, and when they do, players are never excited to find one, because the power to merely delay engagement with monsters is of very limited value. The improved Ring is now a very good 'soft' powerup for mappers to place in their levels, especially when hidden before nasty ambushes, when granting the extreme power of a Quad or a Pentagram is too much. Players also enjoy watching the chaos that ensues.
+
+
+    VORES
+    -----
+Vore missiles have been given a limited turn rate. They will still follow the player aggressively, but sidestepping them is now a skill-based option to buy a few seconds of safety before they loop around again (or to swing them into walls or other targets). Their maneuverability is reduced once their parent Vore has been killed, providing the player another option for shaking them that encourages staying in combat rather than fleeing. Vore missiles also track an invisible player less aggressively.
+
+Vanilla Vores are hard for the mapper to use well because the player response to them is almost always excessive caution, leading to a hard stop on combat. The minigame of "Hide From The Voreball" is so high priority because of their perfect homing that it overrides all other gameplay rather than adding to it, and often forces the player to backtrack through lots of empty map. Fighting a Vore in the open is also a time-delayed death sentence rather than a unique challenge. Mappers therefore tend to deploy Vores alone, frequently as nothing more than turrets. Making Vore missiles home tightly but not perfectly gives the mapper more flexibility to challenge players with Vores in more situations, overlapping in new ways with other monsters, making for more fun level design and combat.
+
+
+    OGRES
+    -----
+Ogres are "semi-Z-aware." An Ogre is now much better at getting grenades near their target, no longer mindlessly firing far over the target's head or at walls beneath them, but without gaining pinpoint in-your-face Z-accuracy, so the player retains some of the expected advantage from large height differences. The Ogre feels more threatening from more angles, but not unfairly so.
+
+The typical Z-aware Ogre implementation makes for Ogres that dead-eye the player unexpectedly from any angle, but vanilla Ogres are of limited utility to the mapper because they have a hard-coded firing arc, requiring that architecture be customized to accomodate them. The Copper approach is simple: average the hard-coded angle and the perfect-solution angle. This yields an Ogre which is much more effective at localizing the "bouncing grenade chaos" to the player's vicinity, but still feels like the old Ogre, so the player's existing instincts for fighting them don't need to be relearned. The mapper can therefore use Ogres more flexibly and with greater confidence.
+
+This is the only kind of Ogre in Copper. Z-accuracy is not a mapper-selectable option on Ogres, to maintain consistency and predictability for the player.
+
+
+    ZOMBIES
+    -------
+Zombies can be killed by any explosion, not just rocket-strength blasts. Ogre grenades were formerly too weak to do more than knock Zombies down even on a direct hit; they now do extra damage vs. Zombies, enough to gib them. This gives players a few sneaky extra ways to eliminate them by exploiting other monsters.
+
+Zombies still require explosions to kill. The "axe kills downed Zombies" feature from Honey was not adopted. It makes chopping up Zombies a slow chore just to save a rocket, and defuses the tension that comes from encountering Zombies before the player has a way to kill them, which robs the mapper of a whole family of potential designed scenarios.
+
+As a helpful quality-of-life improvement for the player, one hit from the Axe instantly knocks a Zombie over without having to "wear it down" first.
+
+Zombies no longer need to be standing to be gibbed by an explosion. Grenades will still not collide against a downed Zombie and explode (this would lead to too many accidental blasts), but a grenade that comes to rest on or next to one before exploding, or explodes against something else that's close enough, will still reduce a Zombie to chunks. The Rocket Launcher works the same way. To be gibbed by Quad Damage shotgun or nailgun fire, however, Zombies must still be standing.
+
+Monsters no longer get stuck eternally infighting with a Zombie they can't kill. They will attack it until they knock it down, then consider it dead and revert to their previous target. The Zombie will also not resume infighting with that monster when it stands back up.
+
+
+    SHAMBLERS
+    ---------
+After a Shambler's first two melee attacks in a row, a chance of making a lightning attack in place of the next melee will gradually build. The "Shambler Dance" of moving in and out to induce but avoid melee attacks remains a viable strategy for a few seconds at a time, but attempting to exploit it continuously is now a more dangerous gamble. Coincidentally, the length of two melee attacks is almost exactly as long as a Shambler can survive sustained fire from the Perforator before dropping.
+
+Players have been heard to complain that once they became skilled at the Dance, Shamblers ceased to be scary. This change still lets players briefly mitigate a Shambler with a practiced series of fake-outs, but infuses the act with a new tension: doing so without an exit plan is as dangerous as it ought to be. Making the strategy less reliable for players makes Shamblers more reliable for mappers: they can now count on a Shambler being a frightening, in-your-face rush monster that forces the player to dance on the move, and not in place.
+
+Shamblers no longer try to fire lightning from beyond the maximum range of their lightning. This bug was largely unnoticeable at the typical scale of Quake's original maps, but became clear as custom Quake levels grew in scope. There is no longer an envelope at the edge of their range within which the charging-up animation is a false signal. (The other potential fix, extending the range of the lightning instead, was rejected out of a desire not to muddy the role of a Shambler as a frightening, in-your-face rush monster with what would amount to the power to snipe the player at a distance.)
+
+
+	ENFORCERS
+	---------
+Enforcers, rather than firing twice in a salvo, begin firing continuously like a turret until they lose line of sight or are interrupted by pain. When encountered in groups or at range, it places greater emphasis on using movement, pain-juggling, and selectively breaking line of sight to manage their threat, which helps all Enforcers feel less like speed bumps and more like a unique threat. 
+
+Enforcers have long and likely pain animations, and most only live long enough to fire twice anyway, so this doesn't introduce inordinate difficulty to most maps. It does add one more axis of micro-decisionmaking for players when an Enforcer is on the field, which is one more tool for designers to use to craft gameplay. It also helps differentiate the Enforcer into a more unique role than "better Grunt" or "non-flying Scrag" for both parties. There is an open in space in Quake's menagerie for (to borrow more parlance from Doom2) a Chaingunner/Arachnotron-style enemy, and the Enforcer's lack of a strong role and existing style of attack makes them an ideal fit. 
+
+
+    OTHER MONSTERS
+    --------------
+The bug where players could be instantly killed by a Fiend, Spawn, or Dog landing on their head has been fixed. Fiends also have a better sense of when their leap path is clear, and will no longer bounce spastically back and forth across a doorway or at the bottoms of stairs.
+
+Knights have had their health reduced from 75 to 72, enough to make it possible to kill them with three careful and complete shotgun blasts instead of always requiring a fourth.
+
+A Hell Knight's magic spreadfire projectiles have been sped up from 300 to 425. This helps make them less of a spammy non-entity at medium to long ranges, while not making the projectile too fast to outrun at close range or dodge at middle range.
+
+Fixes for the various problems with Rotfish (double kill count, being solid too long after death, shrunken head in death frames, getting stuck at the surface of the water) have all been included. They also swim just a little faster and bite just a little harder, so they're not just fodder.
+
+A Spawn that loses sight of its enemy will, eventually, stop leaping around, giving the player another chance to find and kill it in its sluggish state. This mostly preserves the fun-panic unpredictability of Spawns without them being a never-ending crap shoot, making it easier for the mapper to predict how much health or ammo a player might expend fighting them. This behavior interacts with the Ring of Shadows.
+
+Ch'thon still leads his shots to a degree modulated by skill, a necessary component of his balance when there's only so much that can be done with the level around him. His projectiles now travel faster for each time he's been zapped, to add increasing danger and mounting tension to Ch'thon encounters. The hissing bomb-in-flight sound they now make as they narrowly miss the player is pretty good for that, too.
+
+All monsters (except Grunts) already refuse to infight with other monsters of the same classname, but they now take half damage from attacks by such monsters as well. Vores and Ogres are immune to their own splash damage (but not others'), so they can no longer slowly bomb themselves to death.
+
+Infighting monsters who fail to successfully damage their target for 15 seconds will give up on the infight and revert to their previous enemy, so Ogres on plinths no longer accumulate permanent fan clubs milling around their feet. Monsters who do not have a ranged attack will give up after 10 seconds.
+
+Some monsters' bounding boxes have been shortened vertically, so you can't shoot them by firing into empty space above their heads. This does not fix 64x64 monsters getting stuck in rooms with ceilings lower than the height of a Shambler, which requires engine and .bsp support.
+
+
+    SKILL LEVELS
+    ------------
+Monster behavior in Copper is consistent across all four skill levels, and attack frequency is no longer used to artifically inflate the difficulty of Nightmare skill. Nightmare is now distinguished from Hard by reducing the player's maximum health from 100 to 50. This simulates the way that players lean forward and begin playing for keeps only when their health is unusually low, requiring the player to stay in low-health clutch mode to survive. Easy, Medium, and Hard skill levels are still distinguished from each other by the level design.
+
+The highest difficulty level in the game should reward system mastery and high-level play. Monsters in vanilla Nightmare are aggressive to the point of becoming exploitably broken, forced to stand in place and fire continuously when the player is in sight like mindless turrets. This robs the game of an important source of unpredictability, that of monster movements and actions, which in turn only encourages degenerate cheesy tactics from players that aren't valid on any other skill level, so it has been eliminated.
+
+Very few things in Quake's game code (or, for that matter, Doom's) changed with skill level, and this style of design has been scrupulously maintained. The only things that should vary between skill levels are things which are readily apparent and instantly understood. If a map has more monsters and fewer health items, the player understands the harder situation at a glance. If instead the monsters have more health and the health items give less, the difficulty is increased in an opaque and hidden way, because the player's learned expectations are now wrong. Thus instincts developed on Normal would be useless or even detrimental when trying a map on Hard or Nightmare, and vice versa. Since lowered max health is clearly reflected on the HUD, it is immediately understood by the player and instantly teaches them that playing differently is necessary.
+
+The additional Nightmare-only exceptions that make Voreballs 40% faster and Shambler lightning last for 33% longer (and thus do an extra 10 damage) were found to be unnecessary to the new Nightmare gameplay and have been removed. Skill and muscle memory developed on other difficulties for reacting to Shamblers and Vores will serve the player equally well on Nightmare, and are all the more valuable for it. Grunts and Ogres have a diminishing chance to fire more than once in a row in Nightmare mode to make charging them for quick shutdown kills more risky, but all other monsters behave just like they do on other difficulties.
+
+
+    HEALTH
+    ------
+One-point-per-second health degradation when overhealed is now something that simply always happens to every player's health (above 100, or 50 on Nightmare), and is no longer tied to recent Megahealth pickups. Grabbing two Megahealths no longer leads to your health ticking down at twice the rate, and should anyone venture into Copper multiplayer, their health will no longer stop rotting if someone else picks up the same Megahealth after it respawns.
+
+Some health pickups have been given a visual pass. By popular request, +15s are now a little smaller than +25s, to more clearly distinguish them. Megahealths now look a little more ornate (only a little - they're still adorably cubic) and have a unique top texture, so they're no longer generic brown boxes when viewed from above. While this is a break with the "canon" that +15s are rotten +25s, and thus should look similar, too many players seemed unable to tell the existing pickups apart even with extra rot smeared on.
+
+The 50 HP 'safety buffer' that players are healed up to if they finished a prior map with low health is disabled on Nightmare.
+
+
+    ARMOR
+    -----
+The percentage of damage diverted to armor is now proportional to the number of armor HP the player has, rather than always being inherited from the last armor picked up, but otherwise closely matches the original protection amounts players are accustomed to. For example, Red Armor still absorbs the lion's share of damage at first, but effectively 'degrades' to Yellow and then Green protection as it's shot away. The HUD icon still changes color to indicate protection strength, just like before.
+
+This alleviates the effect of a Green Armor lasting longer than a Red Armor, as well as the sudden spike in health damage the player takes after the last points of a Red Armor are lost and the player is left suddenly naked. This also simplifies away the player's awkward mental calculation of deciding whether or not to pick up an armor item when it would raise their armor quantity but lower their armor strength.
+
+The only interaction a player has with an item is to pick it up, so the only decision an item introduces to the game is when to do so. The complex secret armor pickup math of vanilla Quake doesn't make that decision more compelling or interesting, just more opaque. Since the value of an armor pickup is now proportional only to its quantity, more is now unquestionably more, and the only deciding factor is how many points would go to waste. This also helps the mapper predict and adjust difficulty, because every armor granted to the player will wear down and reduce its protection in the same way, while retaining the relatively higher values of Yellow and Red Armor.
+
+'armorvalue'/'armortype' keyvalue hacks still work as normal on monsters.
+
+Armor is now shielded by the Pentagram of Protection, just like health. While the old behavior of still losing armor while invulnerable was something that players were probably used to (those who noticed, at least), it never quite fit the concept of invulnerability, and may very well have simply been a bug. The stylish 666 on the HUD also prevented the player from even knowing how much armor they were losing until the Pent had expired, so this removes the mystery.
+
+
+    NAILGUNS
+    --------
+To help distinguish the two nailguns from each other, so that the Perforator is less of a straight upgrade, the velocity of nails from the Nailgun has been doubled, while the Perforator has been given a little spread (comparable to the Shotgun). This makes the Nailgun better at long-range needling (to reduce the necessity of efficient-but-boring shotgun sniping), while the Perforator is just as good as always at close DPS but potentially wasteful at range. Their damage outputs are unchanged.
+
+The Perforator now fires two regular nails at once, rather than one nail that is "better", to better leverage the aforementioned shoot-through. When the player uses the Perforator with a Quad, the two spikes' damages are always combined against one target, to ensure there is no reduction in ludicrous gibs compared to vanilla Quake.
+
+
+    THE AXE
+    -------
+Players no longer alert monsters by swinging the axe without hitting anything.
+
+The axe view model has been reanimated at 20fps. This makes the axe feel a lot more responsive and satisfying, as the damage frame now lags less behind the attack impulse. Axe damage has also been raised slightly (from 20 to 24), so that it takes exactly as many hits from the Axe to kill any given monster as it takes complete hits from the Shotgun.
+
+The axe now makes sounds when hitting monsters or damageable brushmodels.
+
+
+    AMMO DROPS
+    ----------
+Ogre ammo drops have been reduced to 1 rocket each (from 2). Vanilla Ogres were 'ammo neutral' in that it took two grenades (or two grenades worth of shotgun or nail damage) to kill them, and two grenades were dropped in return, so each Ogre was effectively a means of converting other ammo into rockets. The level designer could not then give the player a grenade launcher or rocket launcher without making them instantly overpowered thanks to all the rockets they'd saved up, due to what a bread and butter monster the Ogre is. This change improves the mapper's ability to make rockets rare if they choose, without having to so severely limit use of Ogres.
+
+Enforcers no longer drop any cells for the same reason.
+
+Small and large rocket ammo pickups have been reduced to 4 and 8 (from 5 and 10) to give the mapper slightly finer control over the quantity of rockets they dish out. This doesn't actually seem to affect the balance of most existing maps too badly, because a perception that rockets are more rare causes players to maximize their value by using them more on groups and big bads, rather than casually spamming grenades around corners or using the rocket launcher to frag one Knight at a time. The CanDamage() bugfix has also been applied, making explosions less likely to skip targets within their blast radius, so rockets and grenades should compensate in application by feeling a bit more powerful against groups.
+
+All small ammo pickups are now centered on their bounding boxes. The rocket ammo pickups have been redone to match the scale and style of the other ammo boxes, and no longer depict weird fat & skinny rockets.
+
+
+    LIQUIDS
+    -------
+Monsters now take damage from immersion in lava or slime. They can wade in it without issue, but if they should get in "over their heads" in a place they can't get out of, they won't run around hidden under the surface forever. Monsters pre-placed in lava or slime remain immune to both so as to not break backwards compatibility with existing maps that hide them there on purpose, but they lose their immunity once they fully leave the liquid. Zombies and Scrags are always immune to slime; Zombies because you can't poison the dead, and Scrags because they spit slime and there's no good way to stop them flying into it anyway. Zombies which take damage from lava are gibbed, because that's the only damage that's meaningful.
+
+The bug that caused drowning damage to be partially subtracted from armor has been fixed. The speed at which drowning damage escalates has been cut back a little instead, so that water is still only proportionately as deadly as before. It's about making the player panic so they drown themselves, after all.
+
+The player recovers most of the damage they took from drowning once they're above water again (or if they find themselves a biosuit while drowning). Short choking episodes do no permanent damage, but the longer the player goes without air, the more health is lost permanently. If they dive below the surface before the recovery is complete (in other words, before they get their wind back) the onset of drowning damage comes sooner and harder the next time. This makes players feel a bit more free to explore underwater just a little too long for only short-term risk but no permanent penalty, which should in turn help mappers feel more comfortable with use of swimming gameplay (especially to make the player feel uncomfortable ...).
+
+Drowning damage and recovery (and only those two things) are reduced to half on Nightmare. While Nightmare is meant to be more scary and deadly, the reduced maximum health would shorten the drowning timer so severely that underwater segments in some maps could become physically impossible to complete.
+
+A biosuit's protection against lava reduces the player's effective depth in lava by one step (ie if immersed in lava, damage is taken as if chest-deep, and so on). This makes a biosuit effectively proof against lava that is only ankle deep.
+
+
+    KEYS & RUNES
+    ------------
+Players can carry more than one key of the same type, should they happen across any. Quake reminds players how many they have with an upper-right-corner print when they grab or use one, and the icon only disappears from the HUD once the last key has been used.
+
+This required a change to how keys work in cooperative play. Keys now disappear when picked up in coop just like in single-player, meaning whichever player grabbed it is the one who has to open the door with it. If that player dies or disconnects, held keys are automatically transferred to a different living player to ensure a map is never made impossible to finish by "losing" a key in an unreachable place. If all other players are dead when a keyholder dies, that player simply respawns with their keys.
+
+This opens up a family of nonlinear level layout possibilities that use duplicate keys to grant the player some choice in which progression gates to unlock in what order, or to promote certain other gating mechanisms to a higher 'tier' than buttons, without the awkwardness of players being unable to pick up a key when they already have one.
+
+Preach's fix for the "restarting after dying loses your runes" bug has been gratefully incorporated. Players can now safely hero it through all the haunted lands of Quake without resorting to quicksaving if they so desire.
+	
+
+    MISCELLANY
+    ----------
+The explobox recursion crash fix has been applied, so barrels-o-fun style usage is possible. Explobox solidity type has been changed to BSP, so the small explobox no longer has a strange tall bounding box, and players can stand and jump up and down on top of both small and large exploboxes (including suicidally barrel-jumping off the tops of them and not just the sides).
+
+Splash damage indirectly activating shootable doors and buttons has been curtailed. Splash radius is reduced by two thirds vs damageable brush entities, so explosions must happen closely enough to be intentional. This preserves the player's ability to use rockets and grenades to activate such entities (and thus the mapper's ability to use them that way), while preventing players or monsters with splash weapons from doing so accidentally.
+
+Intermission cameras will slowly cycle automatically, or can be cycled by players, to ogle every view of the nice level art they didn't notice while deep in skill-based high-level play. Since whichever of 'Jump' or 'Fire' is rebound to cycle the cameras is guaranteed to annoy the 50% of players who use that button, and never the other button, to exit the intermission, intermission cameras in Copper are instead cycled using Impulse 10 & 12 (the next weapon/previous weapon impulses), which most players will likely have bound to the mousewheel.
+
+
+
+    STUFF FOR MAPPERS
+    =================
+A non-exhaustive list:
+
+Smoothly blending fog functionality from Honey/AD, and fog control/transition entities (both a one-time blend entity, and a trigger volume that transitions the fog based on the player's position inside it, so moving back and forth in a hallway doesn't lead to the fog swapping mysteriously at either end). Fog values can also be set on every player start, teleport destination, and intermission camera, so the player's fog can always be set to desired local values.
+
+Plenty of mapper quality-of-life additions have been adapted from Quoth and other places, such as: 
+    - every monster can be configured as a spawner
+    - four targetN keys on all entities (targetnameN keys were not found to be worth the code complexity)
+    - bounding-box point triggers
+    - func_everything support for external bsp/mdl models
+    - auto-spawning or respawning items
+    - toggleable func_walls (either solidity & visibility, or +0/+a texture state)
+    - a generic ambient_sound entity
+    - 'not in coop' and 'coop only' spawnflags 4096 & 8192 supported on all entities
+    - misc_model for .mdl decorations and obligatory dead bodies and candles
+    - override obituary messages with the deathtype keyvalue on all entities
+    - angle keys work on ammo and health - without the need for special ammo models or a worldspawn key
+    - impulse 205 kills all monsters without breaking level scripting
+    - worldspawn gravity key
+    - smooth movement for flying/swimming monsters, including z-axis path walking fix
+    
+Useful new entities:
+    - func_void: for Quoth trigger_void levels of utility plus Honey's pit-death levels of polish, including a nice scream, an even better meaty splat, and integrated "punishment teleporter" alternate functionality.
+    - target_items: Add/subtract/override/check for item/weapon/inventory/stat loadouts on players through an entity. Do useful stuff like test mid-episode maps with an estimated set of starting gear, without having to play through the previous maps. 
+    - target_lock: selectively enable and disable other entities, including triggers, trigger_relays, and path_corners.
+    - func_flytrain: smooth, curvy motion along a chain of path_corners.
+    - target_autosave: saves the game to auto.sav when triggered, can be loaded from console.
+    - info_teleport_target: teleports the activator to it when triggered, for complex scripting where using teleport volumes won't do
+    - target_explosion/target_telefog/target_meat_fireworks: configurable effects on demand without barrel_explode5 think hacks
+    - item_backpack: a small ammo reward for those little hideaways that aren't really full secrets (okay, one new item)
+    - and more
+
+Quake2- & Quake3-style noclip mode which prevents all interaction with the level, so you can fly around without waking monsters and touching stuff.
+
+Override and customize light stylestrings through keyvalues, to create any custom flicker/pulse/discoteque you desire. Triggerable lights can also be toggled between off and a lightstyle.
+
+The most configurable monsterjump trigger ever: include a monster by classname, exclude a monster by classname, plus spawnflags to only allow 32x32 or 64x64 monsters, only melee monsters, as well as "only if my enemy is below me" and "only if my enemy is in front of the trigger."
+
+Coop starting spots can spawn disabled and be enabled by trigger during gameplay, so you can gradually move the coop starts forward to keep them close to the action (or on the correct side of backward-progression blocks).
+
+Trigger_hurt can be set to ignore monsters and/or biosuited players. Target_items can be used to, among many other things, make any trigger ignore invisible players.
+
+Any skip-textured func_ entity can be effective as "creatureclip" with the 'notrace 1' keyvalue. Note: creatureclip is still solid to players, and is used primarily for making monsters walk over grates or other fancy holey floors without blocking line of sight or weapons fire like normal solid skip.
+
+nomonsters cvar is functional.
+
+All of the above was implemented while paying careful attention to backwards compatibility with existing /id1 maps, both stock and custom. Even some of negke's maps.
+
+
+
+    STUFF FOR MOD AUTHORS
+    =====================
+Full QuakeC source is included. You may, and are encouraged to, use it as a base for additional mods, adopting or adapting features, or merely to learn from. Compiling it requires FTEQCC (any version from at least 2018), by Spike, available as of the writing of this document here: [ http://fte.triptohell.info/ ]. Other compilers may work, provided they support a few syntax upgrades (such as field masking and not requiring the 'local' keyword) as well as #pragma autoproto. If you're unsure if your compiler will work, try it and it should tell you. :)
+    
+    
+When extending Copper for your own mod, I strongly encourage you to use the complete corpus of gameplay tweaks described above if you use any, rather than sampling what may be your favorites. This will avoid fracturing for players the 'gameplay base' that Copper strives to provide. Copper touches many aspects of the game in small but significant ways. If every mod were to include a different subset of these, the play experience for each player would be muddled by a trepidatious series of accidental discoveries of which way the player should expect them all to function *this* time, rather than being able to take the entire package as a given *every* time.
+
+Consider the conventional Z-aware Ogres, the ones with perfect aim. When you play a Quake add-on that includes them, how do you learn they're there? Is it in the readme? Does the game warn you? Or do you find out the hard way, the first time one shoots you in the face from an angle you thought safe? Now consider this problem of relearning part of the game as you play, but multiplied across every alteration in Copper. Players could no longer take the presence of any one Copper feature as an indicator of the presence of any other, and while your mod may be that little bit more like the Quake you want others to play, such subtle but constant confusion would, I feel, make Quake a little worse for everyone.
+
+Kell released Quoth closed-source, and cited as a reason a desire to avoid such fracturing caused by "everyone compiling their own interpretations of Quoth." While I feel that's a little too protective, I understand the sentiment. However, a great deal of the mapper features in Copper originate from Quoth, and had to be re-engineered from scratch on my part without any source code to work from, and I won't let any of my personal (and possibly selfish) reservations lead me to do the same to you. The source is provided happily, because this is still better for Quake overall no matter what people may do with it. Everything will work out okay in the end.
+
+
+    ENTITY DEFINITIONS
+    ------------------
+id's original means of generating editor entity definitions was to overload block comments. Every comment block that opened with "/*QUAKED" was considered an entity class definition, whose first line was treated as a formatted metadata definition of name, size, color, and spawnflag names (point/brush status was inferred from presence or absence of a defined size). Everything else in the comment was treated as a descriptive docstring. QuakeEd itself simply scanned the QuakeC game source for these comments directly and built its definition library from there. /*QUAKED*/ definitions could thus be kept alongside the code for the very entities they described, making it easy to keep them updated and accurate. 
+
+Future Radiant map editors that built on QuakeEd moved toward loading them all from one file, with a .def extension, but not changing or extending the syntax at all. The far more common format in use now for entity definitions is Worldcraft's FGD format, now used most prominently by Kristian 'sleepwalkr' Duske's Trenchbroom editor, because it supports quite a bit more metadata regarding keyvalues and their required types, while the QuakeEd/def system only supports this insofar as there's a large block of text in which developers can describe them in plain English.
+
+I have chosen to support entity definition maintenance for FGD in the same way that the QuakeC source originally supported it for QuakeEd: by using comments within the source itself. The Copper source code still includes /*QUAKED*/ comments, adding and updating them wherever relevant to keep them up to date, because while Radiant and QuakeEd users are rare today, they do still exist. :) You will commonly find these paired with comment blocks beginning with "/*FGD" now as well. While editors like Trenchbroom do not scan multiple files looking for such comments, the notation made it easy for me to automate extracting the two types of comment blocks and compiling their contents into respective .def and .fgd files. 
+
+The Python scripts I used for these two tasks are included with the QuakeC source. They should Just Work(tm) provided Python 3+ is installed correctly, which is left as an exercise for the reader. 
+
+
+    CODE REFERENCE
+    --------------
+Here are some handy notes on important functions:
+
+    enemy_vispos(), ai.qc
+    ---------------------
+Any time a monster would use the vector stored as self.enemy.origin, be it for a line of sight test, launching a projectile or some other attack, or any other purpose, enemy_vispos() is called instead. Normally it simply returns self.enemy.origin anyway, but if self.enemy has a Ring of Shadows, it instead returns an origin offset in a standardized noisy way, so that the Ring confuses all monsters identically for gameplay purposes. Be aware that any time you bypass this function and use self.enemy.origin directly, the code in question will not be affected by invisibility unless you check the IT_INVISIBILITY flag manually (the most obvious example being ShalHome() in m_shalrath.qc).
+
+    traceline2(), projectiles.qc
+    ----------------------------
+traceline() can only ignore one entity at a time. To support the 'notrace 1' keyvalue for creatureclip, secondary traces have to be made to continue the trace through any hit notrace 'bmodels' which should be skipped by the trace. traceline2 is a wrapper for this functionality, and will perform any necessary extra traces automatically for you, modifying all the output trace_* global variables to contain accurate unified results as if a single trace had been performed. Thus you can use it exactly the same way you would traceline(), and in fact, you probably should pretty much everywhere.
+
+Note that this is not the same code that enables shotgun penetration, although it is similar. That code is in FireBullets() in w_shotguns.qc (because it needs to apply the special case of adding damage to each TAKEDAMAGE target it passes through). You will notice that even this function still uses traceline2(), because players should be able to fire shotguns through both dying monsters and notrace bmodels at the same time.
+
+    CheckProjectilePassthru() & etc, projectiles.qc
+    -----------------------------------------------
+traceline2() may work for hitscan and line of sight traces passing through a 'notrace' bmodel, but does not help in the case of point entities we would also expect to pass through them, such as nails, grenades, or gibs. These required a little more work. To enable such entities to pass through creatureclip, their touch functions should call CheckProjectilePassthru() and return without doing anything if it returns true. Note that this code IS used for allowing point entities and projectiles to pass through monsters in death animations, unlike traceline2() and FireBullets().
+
+Much more information on understanding and working with point entity passthrough can be had in the comment blocks of projectiles.qc.
+
+    launch_projectile(), projectiles.qc
+    -----------------------------------
+Code duplication in projectile and shooting functions across the codebase was cut down for convenience, and all such functions were gathered together into this file. All nails, rockets, lavaballs, grenades, etc, are spawned by one function or another that either calls launch_projectile() or something else which calls it and modifies the projectile it returns.
+
+    CheckValidTouch(), items.qc
+    ---------------------------
+Checks at the top of touch functions whether 'other' is a player, is alive, and isn't in NOCLIP were becoming ubiquitous across all triggers and items. Any touch function activated only by players can call this for all-in-one confirmation. 
+
+    mon_spawner(), monsters.qc
+    --------------------------
+Copper unifies a monster, a triggerable monster spawn, and a repeatedly-triggerable monster spawner into the monster itself. A monster's spawn function is split into two, with initial game frame necessities (such as precaches) separated from actual spawn completion code (such as walkmonster_start()). Initial setup remains in the monster's classname function, and spawn completion is moved to a second function, universally named as monster_classname_spawn().
+
+The unification is accomplished by way of function objects. First, the classname function calls monster_spawnsetup() and passes it the name of a function which will spawn the monster in question when called. This should be a single-line function (universally named as monster_[name]_spawner()) declared uniquely for each monster, which injects some universal monster spawning code into our monster's spawn completion function by calling mon_spawner_use() and passing the spawn completion function as a parameter. This is a little convoluted, but is necessary so that each monster spawner's Use function is both customized to one monster and callable with no parameters (required by the .th_use field prototype). monster_spawnsetup() checks all the possible spawner configuration states and spawnflags by itself, which are universal across all non-boss monsters. It returns True if the classname function should stop before continuing on to spawn the monster directly (ie, call the spawn completion function). 
+
+Examine any monster's source file (m_*.qc) and scroll to the bottom for an example. To support triggerable monster spawning on a new monster, you need only ensure spawning code is split in the same way, and uses monster_spawnsetup() and mon_spawner_use() the same way. Note that spawnflags 1-5 and 8 are already reserved for spawner configuration, so new monsters will have to make do with flags 6 and 7. There are plenty of spare keyvalues should you feel you need more flavors than that. (at which point the game designer in me asks, "shouldn't that just be more than one kind of monster?")
+
+    
+
+    PERMISSIONS
+    ===========
+You are free to distribute by any electronic means copper.zip, unaltered. Do not distribute new maps made for Copper by repackaging the Copper progs.dat or assets with the map; distribute the map standalone and clearly list Copper as a requirement. 
+
+The original QuakeC game source code on which Copper is based is copyright id software, so mods based on Copper cannot be exploited commercially.
+    
+    
+    
+    ACKNOWLEDGEMENTS
+    ================
+Special thanks to:
+    - Scampie for endless testing, ideas, sounding and discussion
+    - Spike for FTEQCC, and putting up with my stupid questions
+    - Preach for providing QuakeC programming sanity checks, and for an explanation of how to implement Quoth's drifty fly and swim movement without running into the same bugs they did
+    - czg for the fog code in honey_fog.qc and the brilliant and terrible stuffcmd_float() (his maps are ok too)
+    - Bal, ijed, ionous, negke, JCR, mfx, sock, muk, and NewHouse for testing
+	- the entire Quake community for making so many other great mods over the years, because all the different visions of what Quake can be make this game what it is
+
+Assets not by the author:
+    - g_shotgn.mdl is from Rubicon2, by John 'metlslime' Fitzgibbons
+    - Ranger falling-to-his-death sound is from Quake3:Arena, by id software
+    - Backpack pickup sounds are from Arcane Dimensions, by Simon 'sock' O'Callaghan et al
+	- deep1.wav and machlp.wav are from Arcane Dimensions, by Simon 'sock' O'Callaghan
+	- underw1.wav, wdribble.wav, and wpool.wav are from Rubicon2, by John 'metlslime' 
+		Fitzgibbons
+
+
+
+
+================================================================================
+
+    June 20th
+    2019

@@ -1,0 +1,87 @@
+---- qbsp / ericw-tools v0.18.1-32-g6660c5f ----
+Input file: testWildebrookMonsters.map
+Output file: testWildebrookMonsters.bsp
+
+---- LoadMapFile ----
+*** WARNING 02: Multiple info_player_start entities
+*** WARNING 02: Multiple info_player_start entities
+*** WARNING 02: Multiple info_player_start entities
+*** WARNING 06: No info_player_deathmatch entities in level
+         2346 faces
+          391 brushes
+          198 entities
+           19 unique texnames
+          320 texinfo
+
+Opened WAD: C:/Users/Void/Desktop/Quake/wads/id1.wad
+Opened WAD: C:/Users/Void/Desktop/Quake/wads/hipnotic.wad
+Processing hull 0...
+---- Brush_LoadEntity ----
+          391 brushes
+          371 planes
+---- CSGFaces ----
+         2346 brushfaces
+         2079 csgfaces
+         1644 mergedfaces
+---- SolidBSP ----
+         2914 split nodes
+         1126 solid leafs
+         1618 empty leafs
+          171 water leafs
+            0 detail leafs
+            0 detail illusionary leafs
+            0 detail fence leafs
+            0 illusionary visblocker leafs
+         7099 leaffaces
+         6703 nodefaces
+---- Portalize ----
+         1789 vis leafs
+         1789 vis clusters
+         5392 vis portals
+---- FillOutside ----
+          444 outleafs
+---- MergeAll ----
+         1623 mergefaces
+---- SolidBSP ----
+         1212 split nodes
+          573 solid leafs
+          547 empty leafs
+           93 water leafs
+            0 detail leafs
+            0 detail illusionary leafs
+            0 detail fence leafs
+            0 illusionary visblocker leafs
+         4491 leaffaces
+         3980 nodefaces
+---- Portalize ----
+          640 vis leafs
+          640 vis clusters
+         2020 vis portals
+---- Tjunc ----
+         2827 world edges
+        12673 edge points
+         3629 edges added by tjunctions
+            0 faces added by tjunctions
+---- MakeFaceEdges ----
+---- GrowRegions ----
+Processing hull 1...
+Processing hull 2...
+---- WriteBSPFile ----
+Wrote testWildebrookMonsters.bsp
+          774 planes            15480
+         5260 vertexes          63120
+         1212 nodes             29088
+          283 texinfo           11320
+         3980 faces             79600
+         3424 clipnodes         27392
+          641 leafs             17948
+         4491 marksurfaces       8982
+        19544 surfedges         78176
+         9773 edges             39092
+           19 textures         170840
+              lightdata             0
+              visdata               0
+              entdata           13305
+
+0.459 seconds elapsed
+Peak memory usage: 23985186 (22.9M)

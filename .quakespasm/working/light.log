@@ -1,0 +1,38 @@
+---- light / ericw-tools v0.18.1-32-g6660c5f ----
+Raytracing backend: Embree
+running with 4 threads
+LoadBSPFile: 'testWildebrook.bsp'
+BSP is version 29
+SetQdirFromPath: no "maps" in 'C:\Users\Void\Desktop\Quake\working\/testWildebrook.bsp'--- ConvertTextures ---
+--- LoadEntities ---
+WARNING: entity at (-408 -340 264) (light) has empty key/value "delay" ""
+WARNING: couldn't parse '' as number for key 'delay'
+165 entities read, 61 are lights.
+--- OptionsSummary ---
+Embree_TraceInit: Embree version: 2.15.0
+Embree_TraceInit:
+	230 sky faces
+	3669 solid faces
+	0 filtered faces
+	0 shadow-casting skip faces
+SetupLights: 61 initial lights
+SetupLights: 61 after surface lights
+SetupLights: 61 after jittering
+--- EstimateLightVisibility ---
+0....1....2....3....4....5....6....7....8....9....
+Final count: 61 lights, 0 suns in use.
+--- LightWorld ---
+--- LightThread ---
+0....1....2....3....4....5....6....7....8....9....
+Lighting Completed.
+
+lightdatasize: 248836
+0 switchable light styles (32 max)
+Writing testWildebrook.bsp as BSP version 29
+0.369 seconds elapsed
+
+stats:
+1.666909 lights tested, 0.910497 hits per sample point
+0.000000 surface lights tested, 0.000000 hits per sample point
+0.000000 bounce lights tested, 0.000000 hits per sample point
+0 empty lightmaps

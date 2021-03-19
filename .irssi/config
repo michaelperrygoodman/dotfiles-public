@@ -1,0 +1,370 @@
+### void: irssi config
+### ver:  jul 26 2017
+###
+
+### networks/servers/channels
+chatnets = {
+    ### synirc
+    synirc = {
+        type = "IRC";
+    };
+
+    ### freenode
+    freenode = {
+        type = "IRC";
+    };
+};
+
+servers = (
+    ### synirc
+    {
+        address     = "irc.synirc.net";
+        chatnet     = "synirc";
+        port        = "6667";
+        autoconnect = "no";
+        use_ssl     = "no";
+        ssl_verify  = "no";
+    },
+
+    ### freenode
+    {
+        address     = "orwell.freenode.net";
+        chatnet     = "freenode";
+        port        = "6667";
+        autoconnect = "no";
+        use_ssl     = "no";
+        ssl_verify  = "no";
+    },
+
+      ### speedrunslive
+    {
+        address     = "irc.speedrunslive.com";
+        chatnet     = "speedrunslive";
+        port        = "6667";
+        autoconnect = "no";
+        use_ssl     = "no";
+        ssl_verify  = "no";
+    }
+);
+
+channels = (
+    ### synirc
+    { name = "#phiz"; chatnet = "synirc"; autojoin = "no"; }
+);
+
+
+### settings
+settings = {
+    ### core
+    core = {
+        real_name                   = "* I'm too lame to read BitchX.doc *";
+        user_name                   = "void";
+        nick                        = "mpg";
+        quit_message                = "you died.";
+        settings_autosave           = "off";
+        server_connect_timeout      = "1min";
+        awaylog_file                = "~/.irssi/away.log";
+        recode_out_default_charset  = "utf-8";
+    };
+
+    ### irc/core
+    "irc/core" = {
+        alternate_nick              = "_mpg";
+        part_message                = "";
+        ctcp_version_reply          = "irssi v$J";
+        skip_motd                   = "yes";
+        auto_whowas                 = "off";
+        usermode                    = "+iw";
+    };
+
+    ### fe-common/core
+    "fe-common/core" = {
+        theme                       = "themes/BitchX";
+        hilight_nick_matches        = "on";
+        window_history              = "on";
+    };
+
+    ### fe-text
+    "fe-text" = {
+        actlist_sort                = "refnum";
+        scrollback_lines            = "9999";
+    };
+
+    ### perl/core/scripts
+    "perl/core/scripts" = {
+        # >> scripts go here <<
+    };
+};
+
+
+### aliases
+aliases = {
+    ### server/system
+    rel       = "reload";
+    run       = "script load";
+    date      = "time";
+    umode     = "mode $n";
+    no        = "notice";
+    s         = "connect";
+
+    ### unix commands
+    ex        = "exec";
+    sping     = "exec ping $0 | tail -2";
+    uwc       = "exec wc";
+    quota     = "exec quota -v";
+    ps        = "exec ps -x";
+    kp        = "exec kill -9";
+    cal       = "exec cal";
+    lsa       = "exec ls -a";
+    rm        = "exec rm";
+    mv        = "exec mv";
+    cp        = "exec cp -r";
+    mkdir     = "exec mkdir";
+    chmod     = "exec chmod";
+    nsl       = "exec nslookup";
+    gzip      = "exec gzip";
+    gunzip    = "exec gunzip";
+    untar     = "exec tar -xvf";
+
+    ### quits
+    q         = "quit";
+    qq        = "quit";
+    off       = "disconnect";
+    exit      = "quit";
+    die       = "echo /die: already dead inside";
+
+    ### default /away message
+    # aw      = "away -all afk";
+    # aw_zzz  = "away -all zZzZ";
+
+    ### indenting & ghosting for synirc
+    oghost    = "msg -oftc nickserv ghost mpg";
+    oident    = "msg -oftc nickserv identify";
+
+    ### windowing
+    wc        = "window close";
+    wn        = "window new hide";
+    c         = "clear";
+    cl        = "clear";
+
+    ### user
+    wi        = "whois";
+    wii       = "whois $0 $0";
+    ww        = "whowas";
+    w         = "who";
+    m         = "msg";
+    say       = "msg *";
+
+    ### channels
+    j         = "join";
+    wjoin     = "join -window";
+    p         = "part";
+    leave     = "part";
+    n         = "names";
+    t         = "topic";
+
+    ### /fnames
+    fnames    = "foreach channel /names";
+    ftopic    = "foreach channel /topic";
+
+    ### @chanop
+    o         = "op";
+    dop       = "deop";
+    k         = "kick";
+    kb        = "kickban";
+    kn        = "knockout";
+    bans      = "ban";
+    b         = "ban";
+    mub       = "unban *";
+    ub        = "unban";
+    ig        = "ignore";
+    unig      = "unignore";
+
+    ### queries
+    q         = "query";
+    wquery    = "query -window";
+
+    ### dcc
+    dc        = "dcc chat";
+    dcg       = "dcc close get";
+    dcs       = "dcc close send";
+    dcx       = "dcc close chat";
+    xlist     = "ctcp $0 xdcc list";
+
+    ### now playing...
+    # np        = "exec -nosh -window      - /bin/cat /home/hawk/tmp/cmus-status";
+    # npc       = "exec -nosh -window -out - /bin/cat /home/hawk/tmp/cmus-status";
+
+    ## misc aliases
+    calc      = "exec - if command -v bc >/dev/null 2>&1\\; then printf '%s = ' '$*'\\; echo '$*' | bc -l\\; else echo bc was not found\\; fi";
+};
+
+
+### hilights/completions/ignores
+hilights = (
+    ### highlight nicks wherever in line
+    #{ text = "[[:space:],]NICK[,:[:space:]]+"; line = "no"; nick = "no"; word = "yes"; regexp = "yes"; }
+    #{ text = "[[:space:],]NICK[,:[:space:]]+"; line = "no"; nick = "no"; word = "yes"; regexp = "yes"; }
+
+    ### highlight words
+    { text = "void";     fullword = "yes"; color = "%R"; line = "no";  nick = "no";  word = "yes"; }
+);
+
+ignores = (
+    {
+        ### for noisy channels;
+        ### ignoring /joins /parts and /quits to improve readability
+        level     = "JOINS PARTS QUITS";
+        channels  = ( "##javascipt" );
+        network   = "freenode";
+    #},
+    #{
+        ### ignore specific nicks like this:
+        # mask     = "__idiot_fucker__";
+        # level    = "ALL";
+        # channels = ( "#chan" );
+    }
+);
+
+
+### statusbar/windows
+statusbar = {
+    # formats:
+    # when using {templates}, the template is shown only if it's argument isn't
+    # empty unless no argument is given. for example {sb} is printed always,
+    # but {sb $T} is printed only if $T isn't empty.
+
+    items = {
+        # start/end text in statusbars
+        barstart = "{sbstart}";
+        barend = "{sbend}";
+
+        topicbarstart = "{topicsbstart}";
+        topicbarend = "{topicsbend}";
+
+        # treated "normally", you could change the time/user name to whatever
+        time = "{sb $Z}";
+        user = "{sb {sbnickmode $cumode}$N{sbmode $usermode}{sbaway $A}}";
+
+        # treated specially .. window is printed with non-empty windows,
+        # window_empty is printed with empty windows
+        window = "{sb $winref:$tag/$itemname{sbmode $M}}";
+        window_empty = "{sb $winref{sbservertag $tag}}";
+        prompt = "{prompt $[.15]itemname}";
+        prompt_empty = "{prompt $winname}";
+        topic = " $topic";
+        topic_empty = " irssi v$J";
+
+        # all of these treated specially, they're only displayed when needed
+        lag = "{sb lag: $0-}";
+        act = "{sb win: $0-}";
+        more = "-- more --";
+    };
+
+    # there's two type of statusbars. root statusbars are either at the top
+    # of the screen or at the bottom of the screen. window statusbars are at
+    # the top/bottom of each split window in screen.
+    default = {
+        # the "default statusbar" to be displayed at the bottom of the window.
+        # contains all the normal items.
+
+        ### main statusbar
+        window = {
+            disabled         = "no";
+
+            # window, root
+            type             = "window";
+
+            # top, bottom
+            placement        = "bottom";
+
+            # number
+            position         = "2";
+
+            # active, inactive, always
+            visible          = "active";
+
+            # list of items in statusbar in the display order
+            items = {
+                barstart = { priority = "100"; };
+                time         = { };
+                # tag        = { };
+                user         = { };
+                window       = { };
+                usercount    = { };
+                window_empty = { };
+                lag          = { priority = "-1"; };
+                act          = { priority = "10"; };
+                more         = { priority = "-1"; alignment = "right"; };
+                barend       = { priority = "100"; alignment = "right"; };
+            };
+        };
+
+        ### seperate act bar
+        # actbar = {
+        #     window = {
+        #         disabled        = "no";
+        #         type            = "root";
+        #         placement       = "bottom";
+        #         position        = "1";
+        #         visible         = "always";
+        #    };
+        #    items = {
+        #         actbarstart   = {
+        #             priority  = "100";
+        #        };
+        #         chanact       = {
+        #             priority = "10";
+        #         };
+        #         actbarend     = {
+        #             priority  = "100";
+        #             alignment = "right";
+        #         };
+        #     };
+        # };
+
+        ### inactive window statusbar
+        window_inact = {
+            type = "window";
+            placement = "bottom";
+            position = "1";
+            visible = "inactive";
+            items = {
+                barstart = { priority = "100"; };
+                window = { };
+                window_empty = { };
+                more = { priority = "-1"; alignment = "right"; };
+                barend = { priority = "100"; alignment = "right"; };
+            };
+        };
+
+        ### input prompt
+        prompt = {
+            type = "root";
+            placement = "bottom";
+            # we want to be at the bottom always
+            position = "100";
+            visible = "always";
+            items = {
+                prompt = { priority = "-1"; };
+                prompt_empty = { priority = "-1"; };
+                # treated specially, this is the real input line.
+                input = { priority = "10"; };
+            };
+        };
+
+        ### topicbar
+        topic = {
+            type = "root";
+            placement = "top";
+            position = "1";
+            visible = "always";
+            items = {
+                topicbarstart = { priority = "100"; };
+                topic = { };
+                topic_empty = { };
+                topicbarend = { priority = "100"; alignment = "right"; };
+            };
+        };
+    };
+};

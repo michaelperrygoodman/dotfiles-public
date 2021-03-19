@@ -1,0 +1,89 @@
+// Game: Quake
+// Format: Standard
+// entity 0
+{
+"classname" "worldspawn"
+"wad" "C:/Users/Void/Desktop/Quake/wads/start.wad"
+// brush 0
+{
+( -224 -96 -16 ) ( -224 -95 -16 ) ( -224 -96 -15 ) city4_7 -32 -0 -0 1 1
+( -224 -448 -16 ) ( -224 -448 -15 ) ( -223 -448 -16 ) city4_7 32 -0 -0 1 1
+( -224 -96 -16 ) ( -223 -96 -16 ) ( -224 -95 -16 ) city4_7 32 32 -0 1 1
+( -96 32 16 ) ( -96 33 16 ) ( -95 32 16 ) city4_7 32 32 -0 1 1
+( -96 32 16 ) ( -95 32 16 ) ( -96 32 17 ) city4_7 32 -0 -0 1 1
+( 416 32 16 ) ( 416 32 17 ) ( 416 33 16 ) city4_7 -32 -0 -0 1 1
+}
+// brush 1
+{
+( -176 -384 16 ) ( -176 -383 16 ) ( -176 -384 17 ) wizmet1_3 -16 -0 -0 1 1
+( -176 -384 16 ) ( -176 -384 17 ) ( -175 -384 16 ) wizmet1_3 16 -0 -0 1 1
+( -176 -384 16 ) ( -175 -384 16 ) ( -176 -383 16 ) wizmet1_3 16 16 -0 1 1
+( -112 -320 208 ) ( -112 -319 208 ) ( -111 -320 208 ) wizmet1_3 16 16 -0 1 1
+( -112 -320 32 ) ( -111 -320 32 ) ( -112 -320 33 ) wizmet1_3 16 -0 -0 1 1
+( -112 -320 32 ) ( -112 -320 33 ) ( -112 -319 32 ) wizmet1_3 -16 -0 -0 1 1
+}
+// brush 2
+{
+( -176 -96 16 ) ( -176 -95 16 ) ( -176 -96 17 ) wizmet1_3 16 -0 -0 1 1
+( -176 -96 16 ) ( -176 -96 17 ) ( -175 -96 16 ) wizmet1_3 16 -0 -0 1 1
+( -176 -96 16 ) ( -175 -96 16 ) ( -176 -95 16 ) wizmet1_3 16 -16 -0 1 1
+( -112 -32 208 ) ( -112 -31 208 ) ( -111 -32 208 ) wizmet1_3 16 -16 -0 1 1
+( -112 -32 32 ) ( -111 -32 32 ) ( -112 -32 33 ) wizmet1_3 16 -0 -0 1 1
+( -112 -32 32 ) ( -112 -32 33 ) ( -112 -31 32 ) wizmet1_3 16 -0 -0 1 1
+}
+}
+// entity 1
+{
+"classname" "info_player_start"
+"origin" "-112 -192 40"
+}
+// entity 2
+{
+"classname" "light_torch_small_walltorch"
+"origin" "-108 -68 108"
+}
+// entity 3
+{
+"classname" "light_torch_small_walltorch"
+"origin" "-180 -348 124"
+}
+// entity 4
+{
+"classname" "weapon_grenadelauncher"
+"origin" "72 -200 16"
+}
+// entity 5
+{
+"classname" "monster_zombie"
+"origin" "264 -88 40"
+"angle" "180"
+}
+// entity 6
+{
+"classname" "monster_zombie"
+"origin" "224 -152 40"
+"angle" "180"
+}
+// entity 7
+{
+"classname" "monster_zombie"
+"origin" "256 -208 40"
+"angle" "180"
+}
+// entity 8
+{
+"classname" "monster_zombie"
+"origin" "224 -264 40"
+"angle" "180"
+}
+// entity 9
+{
+"classname" "monster_zombie"
+"origin" "264 -328 40"
+"angle" "180"
+}
+// entity 10
+{
+"classname" "light"
+"origin" "312 -208 176"
+}

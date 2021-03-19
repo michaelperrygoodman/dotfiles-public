@@ -1,0 +1,66 @@
+#// -----------------------------------------------
+#// muttrc
+#// -----------------------------------------------
+
+set hostname=localhost
+set hidden_host
+set alias_file="~/.mutt/aliases"
+set postpone=ask-no
+set postponed=+postponed
+set nomove
+set print=ask-yes
+set delete=ask-yes
+set include
+set sort_aux=date-received
+set charset=iso-8859-1
+set noallow_8bit
+set attribution="* %n <%a> [%{%Y-%m-%d %H:%M:%S %Z}]:\n"
+set edit_headers
+set editor="vim"
+#set query_command=""
+set nomark_old
+set mbox=+mbox
+set copy
+set record=+outbox
+set nobeep
+set nosmart_wrap
+set nomarkers
+set mime_forward
+set pager_context=3
+set nostrict_threads
+set sendmail_wait=-1
+set fcc_clear
+set nopipe_decode
+#set print_command="a2ps -lgEmail --borders=no --strip=3"
+set tilde
+set read_inc=100
+set write_inc=100
+set noconfirmappend
+set pager_stop
+#set mailcap_path=""
+#set quote_regexp="^( {0,4}[>|:#%]| {0,4}[a-z0-9]+[>|]+)+"
+set to_chars=" +TCF "
+
+#source /usr/local/doc/mutt/samples/gpg.rc
+#source ~/.mutt/auto_views
+#source ~/mutt/aliases
+#source ~/.mutt/subscriptions              # Define the list of subscribed mailing lists.
+#source ~/.mutt/mailboxes                  # Define the list of folders that receive mail.
+#source ~/.mutt/headers                    # Configure header display.
+#source ~/.mutt/folder-hooks               # Define folder-hooks.
+#source ~/.mutt/save-hooks                 # Define save-hooks.
+#source ~/.mutt/fcc-hooks                  # Define fcc-hooks.
+#source ~/.mutt/message-hooks              # Define message hooks.
+#source ~/.mutt/bindings                   # Define key bindings.
+#source ~/.mutt/macros                     # Define macros.
+#source ~/.mutt/colours                    # Define colours.
+#source ~/.mutt/non-standard               # Support for mutt patches.
+
+# HTML is the last option.
+alternative_order text/enriched text/plain text/html 
+
+# Last, but not least, get mutt to display its version on startup.
+push <show-version>
+
+
+

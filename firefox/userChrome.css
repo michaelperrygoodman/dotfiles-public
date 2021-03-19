@@ -1,0 +1,223 @@
+/* Firefox userChrome.css */
+/* Linux: ~/.mozilla/firefox */
+/* OSX: ~/Library/Application Support/Firefox/Profiles */
+/* Win: %APPDATA%\Mozilla\Firefox\Profiles\ */
+
+/* @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"); */
+@namespace html url("http://www.w3.org/1999/xhtml");
+
+
+/* Tabs ---------- */
+.tabbrowser-tab[visuallyselected="true"] {
+  color: inherit !important; /* Use background tab text color for foreground tabs */
+}
+
+.tab-background[selected=true] {
+  background-color: #333333 !important; /* Selected tab bg */
+}
+
+.tab-line {
+  /* -moz-box-ordinal-group: 2; /* Move the line to the bottom */
+}
+
+.tab-line[selected=true] {
+  background-color: #9400ff !important; /* Remove this for default color */
+}
+
+.tab-text {
+  /* font-family: 'InputSerif Thin' !important;
+  font-size: 16px !important; */
+}
+
+/* Menu Bar ---------- */
+.menubar-text {
+  /* font-family: 'InputSerif Thin' !important; */
+}
+
+/* URLBar ---------- */
+
+/*
+#urlbar-container
+#urlbar
+#urlbar-background
+#urlbar-input-container
+*/
+
+#identity-box:after {
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+/* Firefox userChrome.css */
+/* Linux: ~/.mozilla/firefox */
+/* OSX: /Library/Application Support/Mozilla/Firefox/Profiles */
+/* Win: %APPDATA%\Mozilla\Firefox\Profiles\ */
+
+/* @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"); */
+@namespace html url("http://www.w3.org/1999/xhtml");
+
+
+/* Tabs ---------- */
+.tabbrowser-tab[visuallyselected="true"] {
+  color: inherit !important; /* Use background tab text color for foreground tabs */
+}
+
+.tab-background[selected=true] {
+  background-color: #333333 !important; /* Selected tab bg */
+}
+
+.tab-line {
+  /* -moz-box-ordinal-group: 2; /* Move the line to the bottom */
+}
+
+.tab-line[selected=true] {
+  background-color: #9400ff !important; /* Remove this for default color */
+}
+
+
+/* URLBar ---------- */
+
+/*
+#urlbar-container
+#urlbar
+#urlbar-background
+#urlbar-input-container
+*/
+
+#identity-box:after {
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+#urlbar {
+  position: relative;
+  z-index: 1;
+}
+
+#urlbar[focused=true] #urlbar-background {
+  border-color: #62ffcc !important;
+}
+
+
+/* URLBar Auto-Complete Dropdown ---------- */
+
+/*
+.urlbarView
+.urlbarView-body-outer
+.urlbarView-body-inner
+.urlbarView-results
+.urlbarView-row
+.urlbarView-row-inner
+.urlbarView-no-wrap
+.urlbarView-favicon
+.urlbarView-type-icon
+.urlbarView-tail-prefix
+.urlbarView-title
+.urlbarView-tags
+.urlbarView-title-separator
+.urlbarView-action
+.urlbarView-url
+*/
+
+.urlbarView-row .urlbarView-action {
+  color: #f3d656 !important;
+}
+
+.urlbarView-url {
+  color: #62ffcc !important;
+}
+
+/* URL Bar drop-down Selected/Hover Colors */
+.urlbarView-row[selected],
+.urlbarView-row:hover {
+  background-color: transparent !important;
+}
+
+.urlbarView-row[selected] .urlbarView-row-inner,
+.urlbarView-row:hover  .urlbarView-row-inner {
+  background-color: #333333 !important;
+}
+
+.urlbarView-row[selected] .urlbarView-title,
+.urlbarView-row:hover .urlbarView-title,
+.urlbarView-row[selected] .urlbarView-secondary,
+.urlbarView-row:hover .urlbarView-secondary,
+.urlbarView-row[selected] .urlbarView-title-separator,
+.urlbarView-row:hover .urlbarView-title-separator     {
+  color: inherit !important;
+}
+
+#urlbar {
+  position: relative;
+  z-index: 1;
+}
+
+#urlbar[focused=true] #urlbar-background {
+  border-color: #62ffcc !important;
+}
+
+
+/* URLBar Auto-Complete Dropdown ---------- */
+/*
+.urlbarView
+.urlbarView-body-outer
+.urlbarView-body-inner
+.urlbarView-results
+.urlbarView-row
+.urlbarView-row-inner
+.urlbarView-no-wrap
+.urlbarView-favicon
+.urlbarView-type-icon
+.urlbarView-tail-prefix
+.urlbarView-title
+.urlbarView-tags
+.urlbarView-title-separator
+.urlbarView-action
+.urlbarView-url
+*/
+
+.urlbarView-row .urlbarView-action {
+  color: #f3d656 !important;
+}
+
+.urlbarView-url {
+  color: #62ffcc !important;
+}
+
+/* URL Bar drop-down Selected/Hover Colors */
+.urlbarView-row[selected],
+.urlbarView-row:hover {
+  background-color: transparent !important;
+}
+
+.urlbarView-row[selected] .urlbarView-row-inner,
+.urlbarView-row:hover  .urlbarView-row-inner {
+  background-color: #222222 !important;
+}
+
+.urlbarView-row[selected] .urlbarView-title,
+.urlbarView-row:hover .urlbarView-title,
+.urlbarView-row[selected] .urlbarView-secondary,
+.urlbarView-row:hover .urlbarView-secondary,
+.urlbarView-row[selected] .urlbarView-title-separator,
+.urlbarView-row:hover .urlbarView-title-separator     {
+  color: inherit !important;
+}
+
+/* Bookmark Bar ---------- */
+.bookmark-item {
+  /* font-family: 'InputSerif Thin' !important; */
+<<<<<<< HEAD
+}
+=======
+}
+>>>>>>> 36f2cef... font fix
